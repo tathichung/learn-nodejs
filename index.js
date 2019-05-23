@@ -10,11 +10,18 @@ app.set('views', './views')
 // });
 
 app.get('/', function(req, res){
-    res.send('<h1>Hello Chung</h1><a href="/users">User list</a>');
+    res.render('index', {
+        name: 'Thu'
+    });
 });
 
 app.get('/users', function(req, res) {
-    res.send('User list');
+    res.render('users/index', {
+        users: [
+            {id:1, name: 'Hoan'},
+            {id:2, name:'Hieu'}
+        ]
+    });
 });
 
 app.listen(port, function() {
