@@ -14,15 +14,25 @@ app.get('/', function(req, res){
         name: 'Thu'
     });
 });
-
+var users = [
+    {id:1, name: 'Hoan'},
+    {id:2, name:'Hieu'}
+]
 app.get('/users', function(req, res) {
     res.render('users/index', {
-        users: [
-            {id:1, name: 'Hoan'},
-            {id:2, name:'Hieu'}
-        ]
+        users: users
     });
 });
+
+app.get('/users/search', function(req, res){
+    var q= req.query.q;
+    var matchedUsers= users.filter(function(user){
+        return user.name.toLowerCase().indexOf(q.toLowerCase()) !== -1;
+    });
+    res.render('users/index', {
+        users: matchedUsers
+    })
+})
 
 app.listen(port, function() {
     console.log('Server listening on port' + port);
